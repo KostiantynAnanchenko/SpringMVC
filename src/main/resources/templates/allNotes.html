@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>MY NOTES</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .content {
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <h1>MY NOTES</h1>
+        </div>
+    </div>
+
+    <div th:each="note : ${listNotes}">
+        <div class="row">
+            <div class="col content">
+                <h2 th:text="${note.title}"></h2>
+                <p th:text="${note.content}"></p>
+
+                <form th:action="@{/note/delete}" method="post">
+                    <a th:href="@{'edit/' + ${note.id}}" class="btn btn-success" role="button">EDIT</a>
+                    <input type="hidden" name="id" th:value="${note.id}">
+                    <button type="submit" class="btn btn-danger">DELETE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col text-center">
+            <a href="/note/add" class="btn btn-success" role="button">ADD NEW NOTE</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
